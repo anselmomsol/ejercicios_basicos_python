@@ -19,8 +19,7 @@ for i in range(numero):
 
 #5
 nombre2 = input("Ingresa tu nombre ")
-nombre_list = list(nombre2)
-nombre_len = len(nombre_list) 
+nombre_len = len(nombre2) 
 print(f"El nombre {nombre2} tiene {nombre_len} letras") 
 
 #6
@@ -41,13 +40,16 @@ print(f"los numeros introducidos son {numero_1} y {numero_2}, el cociente de su 
 
 #8
 
-capital_inicial = int(input("Introduzca su capital inicial $$: "))
-interes = int(input("Introduzca el interes a generar: "))
+capital_inicial = float(input("Introduzca su capital inicial $$: "))
+interes = float(input("Introduzca el interes a generar: "))
 anos = int(input("Introduzca la cantidad de años que quiere invertir: "))
 
-porcentaje = capital_inicial * interes / 100
-total = porcentaje*anos
-print(f"El interes generado sera de $ {total}")
+if interes >= 1:
+    porcentaje = capital_inicial * interes / 100
+    total = porcentaje*anos
+    print(f"El interés generado sera de $ {total}")
+else:
+    print("Interés no valida.")
 
 #9
 
@@ -62,8 +64,10 @@ print(f"El peso total del paquete será de {peso_total}")
 #10
 
 edad_usuario = int(input("Introduzca su edad: "))
-if(edad_usuario >= 18):
+if edad_usuario >= 18:
     print("Usted es mayor de edad")
+elif edad_usuario <= 0:
+    print("Edad no valida.")
 else:
     print("Usted NO es mayor de edad")
 
@@ -74,7 +78,7 @@ contraseña_correcta = True
 
 while(contraseña_correcta):
     contra_usuario = input("Introduzca la contraseña: ")
-    if(contra_usuario ==  contraseña):
+    if(contra_usuario.lower() ==  contraseña):
         contraseña_correcta = False
         print("Contraseña correcta.")
         break
@@ -144,7 +148,7 @@ while(condicion):
 
 edad_cumplida = int(input("Introduzca su edad: "))
 for i in range(edad_cumplida):
-    print(f"Usted a cumplido {i + 1} años durante sus {edad_cumplida} años.")
+    print(f"Usted ha cumplido {i + 1} años durante sus {edad_cumplida} años.")
 
 #17
 
@@ -152,7 +156,7 @@ lista = [1,2,3,4,5,6,7,8,9,10]
 numero = 1
 
 for num in lista:
-    for numero in lista:
+    for numero in lista: #este se va a ejecutar primero.
         resultado = num * numero
         print(f"{num} X {numero} = {resultado}")
         numero + 1
@@ -219,14 +223,15 @@ frutas = {
 }
 
 fruta = input("¿Qué fruta desea? ").lower()
-cantidad = float(input("¿Cuánto desea? "))
 
-for y in frutas.keys():
+for y in frutas: #no es necesario el keys
     if y == fruta:
+        cantidad = float(input("¿Cuánto desea? "))
         precio = frutas[fruta] * cantidad
         print(f"El precio de la frutas es $ {precio}")
-    else:
-        print("No tenemos esa fruta.")
+        break
+    elif fruta not in frutas: 
+        print("La fruta no se encuentra.")
         break
 
 #24
@@ -244,7 +249,7 @@ creditos_total = 0
 for asignatura,creditos in programa_asignaturas.items():
     print(f"La asignatura {asignatura} tiene los siguientes créditos: {creditos}. ")
     creditos_total += creditos
-    print(f"El total de creditos es {creditos_total}")
+print(f"El total de creditos es {creditos_total}")
 
 #25
 
@@ -255,7 +260,7 @@ lista_abc =list(ascii_lowercase)
 
 lista_vocales = ["a","e","i","o","u"]
 
-nueva_lista = list(ascii_lowercase)
+nueva_lista = lista_abc.copy()
 
 for letras in lista_abc:
     for letra in lista_vocales:
